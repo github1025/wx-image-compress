@@ -18,24 +18,6 @@ export default class ImgCompress {
     return this.page.drawCanvas(src, aspectRatio, quality);
   }
 
-  // 获取图片文件信息
-  getImageFileInfo(imgPath) {
-    let info = {};
-    return _.promise(wx.getImageInfo, {
-      src: imgPath
-    }).then(res => {
-      info.height = res.height;
-      info.width = res.width;
-      info.type = res.type;
-      info.path = res.path;
-      return _.promise(wx.getFileInfo, {
-        filePath: imgPath,
-      })
-    }).then(res => {
-      info.size = res.size;
-      return _.resolve(info);
-    })
-  }
 
  // 绘制图片
   drawCanvas(src, aspectRatio, quality){
@@ -124,7 +106,24 @@ const _ = {
       }
     })
   },
-
+// 获取图片文件信息
+  getImageFileInfo(imgPath) {
+    let info = {};
+    return _.promise(wx.getImageInfo, {
+      src: imgPath
+    }).then(res => {
+      info.height = res.height;
+      info.width = res.width;
+      info.type = res.type;
+      info.path = res.path;
+      return _.promise(wx.getFileInfo, {
+        filePath: imgPath,
+      })
+    }).then(res => {
+      info.size = res.size;
+      return _.resolve(info);
+    })
+  },
   /**
    * 返回promise对象
    * 
